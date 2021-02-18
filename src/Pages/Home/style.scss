@@ -1,0 +1,10 @@
+.Home{
+    .home-hero{
+        height:calc( 100vh - 56px);
+        background-image: url("https://picsum.photos/id/166/1366");
+        background-size:cover;
+        h1,h2{
+            text-shadow: 3px 3px 3px #333;
+        }
+    }
+}
