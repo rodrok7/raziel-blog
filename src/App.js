@@ -23,12 +23,7 @@ import PostDetail from './Pages/PostDetail';
 import api from './lib/api'
 
 function App() {
-  useEffect( () => {
-    console.log(api.auth()) 
-    let token = api.auth()
-    /*localStorage.setItem("auth", token)
-    localStorage.setItem("isAuthenticated", true)*/
-  },[])
+ 
 
   let isAuthenticated = localStorage.getItem("isAuthenticated")
   console.log( isAuthenticated )

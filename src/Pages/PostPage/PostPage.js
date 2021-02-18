@@ -14,17 +14,15 @@ import {
     Link
 } from 'react-router-dom'
 
+import api from '../../lib/api'
+
 import './style.css'
 
 function PostPage() {
     const [postCollection, setPostCollection] = useState({})
 
-    useEffect(() => {
-        fetch("https://ajaxclass-1ca34.firebaseio.com/israel/posts/.json")
-            .then(response => response.json())
-            .then(json => {
-                setPostCollection(json)
-            })
+    useEffect( async () => {
+        setPostCollection( await api.getAllPosts() )
     }, [])
 
     return (

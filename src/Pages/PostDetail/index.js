@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+/*importamos el archivo api.js bajo el alias "api", así podremos invocar cualquier método de este archivo usando api.nombreDelMétodo( parametros )*/
 import api from '../../lib/api'
 
 import {
@@ -15,17 +16,16 @@ import {
 function PostDetail() {
     const [ postData, setPostData ] = useState({})
 
-    useEffect( () => {
+    /* para poder extraer adecuadamente el resultado de nuestras peticiones, es necesario que el callback de useEffect sea una fución asíncrona ( async () => {} )*/
+    useEffect( async () => {
         const urlParams = new URLSearchParams(window.location.search);
         console.log( urlParams )
         const postId = urlParams.get('postId');
-        console.log( postId )
-        fetch(`https://ajaxclass-1ca34.firebaseio.com/israel/posts/${postId}/.json`).then( response => response.json())
-        .then( json => {
-            setPostData( json )
-        })
+        
+        /*seteamos la data del post seleccionado usando la respuesta del método getSinglePost de nuestro archivo api*/
 
-        console.log( api.auth())
+        setPostData( await api.getSinglePost( postId ))
+        /*requerimos usar await para que nos guarde la data de la petición en el estado*/
     }, [])
 
     let { imgUrl, title, content } = postData
