@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Row,
@@ -19,51 +19,43 @@ import Home from './Pages/Home/Home'
 import WriteAPost from './Pages/WriteAPost/WriteAPost'
 import PostPage from './Pages/PostPage/PostPage';
 import PostDetail from './Pages/PostDetail';
+import LoginForm from './Pages/LoginForm/LoginForm'
 
 import api from './lib/api'
 
 function App() {
- 
 
-  let isAuthenticated = localStorage.getItem("isAuthenticated")
-  console.log( isAuthenticated )
+
+  let token = localStorage.getItem("token")
+  console.log(token)
   return (
     <div className="App">
       <Router>
-        <MainNav/>
+        <MainNav />
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        {
-            isAuthenticated ? (
-              <Container fluid>
-                        <Switch>
-                          <Route path="/posts">
-                            <PostPage/>
-                          </Route>
-                          <Route path="/post-detail">
-                            <PostDetail/>
-                          </Route>
-                          <Route path="/write-post">
-                            <WriteAPost/>
-                          </Route>
-                          <Route exact path="/">
-                            <Home/>
-                          </Route>
-                        </Switch>
-                      </Container>
-            ) : (
-              <>
-              <p>Debes iniciar sesión</p>
-              <button type="button" onClick={() => {
-                localStorage.setItem("isAuthenticated", true )
-                window.location.reload();
-              }}>Iniciar sesión</button>
-              </>
-            )
-          
-        }
+
+        <Container fluid>
+          <Switch>
+            <Route path="/posts">
+              <PostPage />
+            </Route>
+            <Route path="/post-detail">
+              <PostDetail />
+            </Route>
+            <Route path="/write-post">
+              { token ? <WriteAPost /> : <LoginForm /> }
+            </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route exact path="/">
+              <LoginForm />
+            </Route>
 
 
+          </Switch>
+        </Container>
       </Router>
     </div>
   );

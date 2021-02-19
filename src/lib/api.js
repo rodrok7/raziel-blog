@@ -15,5 +15,20 @@ export default {
         const response = await fetch( `https://ajaxclass-1ca34.firebaseio.com/israel/posts/${postId}.json` )
 
         return await response.json()
+    },
+
+    login( userObject ){
+        console.log(userObject)
+        let { userName, password } = userObject
+
+        //!userObject && {status:"error", errorMsg:"debes proporcionar tus datos"}
+
+        let response;
+
+         userName === "israel@kodemia.mx" && password === "123456" 
+            ? response = { status: "ok", token:123456789, role:"admin"}
+            : response = { status: "error", errorCode: 300, errorMsg : "Usuario o contraseña incorrectos" }
+
+        return response
     }
 }

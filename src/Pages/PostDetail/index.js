@@ -6,12 +6,8 @@ import api from '../../lib/api'
 import {
     Row,
     Col,
-    Card,
-    CardImg,
-    CardBody,
-    CardTitle,
-    CardText,
 } from 'reactstrap'
+import FullPost from '../../Components/FullPost'
 
 function PostDetail() {
     const [ postData, setPostData ] = useState({})
@@ -28,23 +24,10 @@ function PostDetail() {
         /*requerimos usar await para que nos guarde la data de la petición en el estado*/
     }, [])
 
-    let { imgUrl, title, content } = postData
-
     return (
         <Row className="PostDetail p-3">
             <Col xs="12" md={{ size: 10, offset: 1 }}>
-                <Card className="shadow">
-                    <CardImg 
-                        top 
-                        width="100%" 
-                        src={imgUrl}
-                        alt="Card image cap" 
-                    />
-                    <CardBody>
-                        <CardTitle tag="h5">{ title }</CardTitle>
-                        <CardText>{ content }</CardText>
-                    </CardBody>
-                </Card>
+                <FullPost postData = { postData }/>
             </Col>
         </Row>
     )
